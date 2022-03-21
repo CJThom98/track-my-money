@@ -16,3 +16,16 @@ request.onsuccess = function(event) {
         uploadBudget();
     }
 };
+
+request.onerror = function(event) {
+    console.log(event.target.errorCode);
+};
+
+// offline function
+function saveRecord(record) {
+    const transaction = db.transaction(['new_budget'], 'readwrite');
+
+    const budgetObjectStore = transaction.objectStore('new_budget');
+
+    budgetObjectStore.add(record);
+}
